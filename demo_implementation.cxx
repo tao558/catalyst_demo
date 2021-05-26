@@ -16,15 +16,6 @@ void catalyst_initialize(const conduit_node* params)
   std::cout << "Initializing" << std::endl;
   conduit_cpp::Node n = conduit_cpp::cpp_node(const_cast<conduit_node*>(params));
 
-  if (n["stage"].as_string() != "initialize")
-  {
-    std::stringstream msg;
-    msg << "ERROR: Expected node stage to be \"initialize\", got " << n["stage"].as_string()
-        << std::endl;
-
-    throw std::runtime_error(msg.str());
-  }
-
   if (n["data"].as_int32() != 10)
   {
     std::stringstream msg;
@@ -39,15 +30,6 @@ void catalyst_execute(const conduit_node* params)
   catalyst_stub_execute(params);
   std::cout << "Executing" << std::endl;
   conduit_cpp::Node n = conduit_cpp::cpp_node(const_cast<conduit_node*>(params));
-
-  if (n["stage"].as_string() != "execute")
-  {
-    std::stringstream msg;
-    msg << "ERROR: Expected node stage to be \"execute\", got " << n["stage"].as_string()
-        << std::endl;
-
-    throw std::runtime_error(msg.str());
-  }
 
   if (n["data"].as_int32() != 11)
   {
@@ -64,15 +46,6 @@ void catalyst_finalize(const conduit_node* params)
   catalyst_stub_finalize(params);
   std::cout << "Finalizing" << std::endl;
   conduit_cpp::Node n = conduit_cpp::cpp_node(const_cast<conduit_node*>(params));
-
-  if (n["stage"].as_string() != "finalize")
-  {
-    std::stringstream msg;
-    msg << "ERROR: Expected node stage to be \"finalize\", got " << n["stage"].as_string()
-        << std::endl;
-
-    throw std::runtime_error(msg.str());
-  }
 
   if (n["data"].as_int32() != 12)
   {

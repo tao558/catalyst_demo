@@ -24,21 +24,14 @@ int main(int argc, char* argv[])
 
   int a = 10;
   node["data"].set_int32(a);
-  node["stage"].set_char8_str("initialize");
   catalyst_initialize(conduit_cpp::c_node(&node));
 
-  node["stage"].set_char8_str("execute");
-  node["data"] = a++;
-  for (unsigned i = 0; i < 3; i++)
-  {
-    catalyst_execute(conduit_cpp::c_node(&node));
-  }
+  node["data"] = ++a;
+  catalyst_execute(conduit_cpp::c_node(&node));
 
-  node["stage"].set_char8_str("finalize");
   node["data"] = ++a;
   catalyst_finalize(conduit_cpp::c_node(&node));
 
-  node["stage"].set_char8_str("about");
   catalyst_about(conduit_cpp::c_node(&node));
 
 #ifdef CATALYST_USE_MPI
