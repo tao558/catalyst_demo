@@ -18,20 +18,22 @@ int main(int argc, char* argv[])
   MPI_Init(&argc, &argv);
 #endif
 
-  conduit_cpp::Node node;
-
   usleep(3000000);
 
-  int a = 10;
-  node["data"].set_int32(a);
+  conduit_cpp::Node node;
+
+  node["stage"] = "Initialize";
   catalyst_initialize(conduit_cpp::c_node(&node));
 
-  node["data"] = ++a;
+  int a = 0;
+  node["data"].set_external(&a);
+  node["stage"] = "Execute";
   catalyst_execute(conduit_cpp::c_node(&node));
 
-  node["data"] = ++a;
+  node["stage"] = "Finalize";
   catalyst_finalize(conduit_cpp::c_node(&node));
 
+  node["stage"] = "About";
   catalyst_about(conduit_cpp::c_node(&node));
 
 #ifdef CATALYST_USE_MPI

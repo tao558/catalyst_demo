@@ -12,29 +12,21 @@
 //-----------------------------------------------------------------------------
 void catalyst_initialize(const conduit_node* params)
 {
-  catalyst_stub_initialize(params);
-  std::cout << "Initializing" << std::endl;
   conduit_cpp::Node n = conduit_cpp::cpp_node(const_cast<conduit_node*>(params));
-
-  if (n["data"].as_int32() != 10)
-  {
-    std::stringstream msg;
-    msg << "ERROR: Expected node data to be equal to 10, got " << n["data"].as_int32() << std::endl;
-    throw std::runtime_error(msg.str());
-  }
+  std::cout << "On stage " << n["stage"].as_char8_str() << std::endl;
 }
 
 //-----------------------------------------------------------------------------
 void catalyst_execute(const conduit_node* params)
 {
-  catalyst_stub_execute(params);
-  std::cout << "Executing" << std::endl;
   conduit_cpp::Node n = conduit_cpp::cpp_node(const_cast<conduit_node*>(params));
+  std::cout << "On stage " << n["stage"].as_char8_str() << std::endl;
 
-  if (n["data"].as_int32() != 11)
+  int* dat = n["data"].as_int32_ptr();
+  if (*dat != 0)
   {
     std::stringstream msg;
-    msg << "ERROR: Expected node data to be equal to " << 11 << ", got " << n["data"].as_int32()
+    msg << "ERROR: Expected node data to be equal to 0, got " << *dat
         << std::endl;
     throw std::runtime_error(msg.str());
   }
@@ -43,17 +35,8 @@ void catalyst_execute(const conduit_node* params)
 //-----------------------------------------------------------------------------
 void catalyst_finalize(const conduit_node* params)
 {
-  catalyst_stub_finalize(params);
-  std::cout << "Finalizing" << std::endl;
   conduit_cpp::Node n = conduit_cpp::cpp_node(const_cast<conduit_node*>(params));
-
-  if (n["data"].as_int32() != 12)
-  {
-    std::stringstream msg;
-    msg << "ERROR: Expected node data to be equal to 12, got " << n["data"].as_int32() << std::endl;
-
-    throw std::runtime_error(msg.str());
-  }
+  std::cout << "On stage " << n["stage"].as_char8_str() << std::endl;
 }
 
 //-----------------------------------------------------------------------------

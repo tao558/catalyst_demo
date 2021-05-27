@@ -17,7 +17,9 @@ file(MAKE_DIRECTORY ${data_dump_directory})
 string(CONCAT setup_demo_content
               "export DEMO_IMPLEMENTATION_LIB_DIRECTORY=$<TARGET_FILE_DIR:demo_implementation>"
               "\n"
-              "export DEMO_CATALYST_DATA_DUMP_DIRECTORY=${data_dump_directory}")
+              "export DEMO_CATALYST_DATA_DUMP_DIRECTORY=${data_dump_directory}"
+              "\n"
+              "export OLD_LD_LIBRARY_PATH=$ENV{LD_LIBRARY_PATH}")
 
 file(GENERATE OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/setup_demo.sh"
      CONTENT ${setup_demo_content}
