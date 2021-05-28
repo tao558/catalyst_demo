@@ -22,11 +22,11 @@ void catalyst_execute(const conduit_node* params)
   conduit_cpp::Node n = conduit_cpp::cpp_node(const_cast<conduit_node*>(params));
   std::cout << "On stage " << n["stage"].as_char8_str() << std::endl;
 
-  int* dat = n["data"].as_int32_ptr();
-  if (*dat != 0)
+  int* ptr_to_a = n["data"].as_int32_ptr();
+  if (*ptr_to_a != 0)
   {
     std::stringstream msg;
-    msg << "ERROR: Expected node data to be equal to 0, got " << *dat
+    msg << "ERROR: Expected node data to be equal to 0, got " << *ptr_to_a
         << std::endl;
     throw std::runtime_error(msg.str());
   }
