@@ -8,12 +8,12 @@ Example usage of Catalyst. Instructions for running the demo, changing Catalyst 
 4. source the `setup_demo.sh` file, which will set some helpful environment variables, listed below.
     1. `DEMO_IMPLEMENTATION_LIB_DIRECTORY`, which is the location of our custom catalyst implementation library. We'll use this environment variable to switch to our custom implementation at runtime.
     2. `DEMO_CATALYST_DATA_DUMP_DIRECTORY`, the location where we can write nodes to disk using the stub implementation. This by default is `${CMAKE_CURRENT_BINARY_DIR}/data_dumps`. The directory is created automatically by CMake.
-    3. `DEMO_OLD_LD_LIBRARY_PATH`, the value of the `LD_LIBRARY_PATH` environment variable at the time of cmake configuration. We'll use this to switch from our custom implementation to Catalyst's stub implementation.
+    3. `DEMO_OLD_LD_LIBRARY_PATH`, the value of the `LD_LIBRARY_PATH` environment variable at the time of `CMake` configuration. We'll use this to switch from our custom implementation to Catalyst's stub implementation.
 5. Copy the `catalyst_replay` executable from Catalyst's build directory to the build directory of the demo. This should be located in `bin/` under Catalyst's build directory.
 
 ## Running the demo
 
-1. To run the driver, run `./demo_driver`. Note that at first, we are using the stub implementation.
+1. To run the driver, run `./demo_driver`. Note that at first, we are using the stub implementation, so there is no output.
 2. To switch to the custom implementation provided here, run `export LD_LIBRARY_PATH="$DEMO_IMPLEMENTATION_LIB_DIRECTORY"`. Re-executing `demo_driver` should output:
 
    ```
